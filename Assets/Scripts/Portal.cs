@@ -15,6 +15,7 @@ public class Portal : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D c)
     {
+      
 
             ((GameObject)GameObject.FindGameObjectWithTag("WinText")).GetComponent<TextMesh>().renderer.enabled = true;
     }

@@ -6,6 +6,7 @@ public class getVector : MonoBehaviour {
 
     public float delta = 1.0f;
 	// Use this for initialization
+    Vector2 newPoint = new Vector2(0, 0);
 
 	void Start () {
 		/*List<Vector2> list = getVect("-x+4");
@@ -33,7 +34,7 @@ public class getVector : MonoBehaviour {
 	public List<Vector2> getVect(string s){
 		List<Vector2> list = new List<Vector2> ();
 		string ss;
-        for (double i = -20; i < 20; i += delta)
+        for (double i = -20; i < 20; i += 0.5f)
         {
             if(i == 0)
             {
@@ -49,8 +50,15 @@ public class getVector : MonoBehaviour {
             {
                 numstr = i.ToString();
             }
+            
 			ss = ss.Replace("x", numstr);
-			list.Add(new Vector2((float)i,(float)getValue(ss)));
+            newPoint.x = (float)i;
+            newPoint.y = (float)getValue(ss);
+            if(list.Count == 0 || 
+                Vector2.Distance(list[list.Count - 1], newPoint) > 0.1f)
+            {
+                list.Add(newPoint);
+            }
 
 		}
 		return list;

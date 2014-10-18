@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 public class LevelState : MonoBehaviour {
 
+    public GameObject button;
 	public string formula = "";
 	static char[] mixedFormula;
+    List<GameObject> list = new List<GameObject>(0);
+    List<GameObject> activated = new List<GameObject>(0);
 
 	// Use this for initialization
 	void Start () {
@@ -12,6 +15,7 @@ public class LevelState : MonoBehaviour {
 		while (formula.ToCharArray() == mixedFormula) {
 			mixedFormula = shuffleString(formula);
 		}
+        createButtons(mixedFormula);
 	}
 
 	char[]	 shuffleString(string str)
@@ -28,10 +32,63 @@ public class LevelState : MonoBehaviour {
 		}  
 		return mixedArray;
 	}
+
+    void createButtons(char[] a)
+    {
+        list.Capacity = a.Length;
+        for (int i = 0; i < list.Capacity; i++)
+        {
+            GameObject button1 = (GameObject)Instantiate(button, new Vector3(11, 7 - i), Quaternion.identity);
+            TextMesh tm = button1.GetComponentInChildren<TextMesh>();
+            tm.text = "";
+            tm.text += a[i];
+            list.Add(button1);
+            Debug.Log(a[i]);
+            Debug.Log(button1.transform.position);
+        }
+        button.tag = "text";
+    }
+
 	
 	// Update is called once per frame
-	void Update () {
-	}
+    void Update () {
+        if (Input.GetMouseButtonDown(0))
+        {
+            TextMesh eval = GameObject.FindGameObjectWithTag("Evaluation").GetComponent<TextMesh>();
+            GraphicLineGenerator graphic = GameObject.FindGameObjectWithTag("GraphicLine").GetComponentInChildren<GraphicLineGenerator>();
+            Debug.Log("кнопканажата.");
+            Vector3 vector = Input.mousePosition;
+            vector = Camera.main.ScreenToWorldPoint(vector);
+            vector.z = 0;
+            Debug.Log(vector);
+            for (int i = 0; i < list.Count; i++)
+            {
+                Vector3 buttonPos = list[i].transform.position;
+                Debug.Log(buttonPos);
+                if ((Mathf.Abs(vector.x - buttonPos.x) <= list[i].collider2D.bounds.size.x/2) &&
+                    (Mathf.Abs(vector.y - buttonPos.y) <= list[i].collider2D.bounds.size.y/2))
+                {
+                    if (!activated.Contains(list[i]))
+                    {
+                        activated.Add(list[i]);
+                    }
+                    else
+                    {
+                        activated.Remove(list[i]);
+                    }
+                    eval.text = "y=";
+                    foreach(GameObject obj in activated)
+                    {
+                        TextMesh text = obj.GetComponentInChildren<TextMesh>();
+                        eval.text += text.text;
+                    }
+                    graphic.formula = eval.text.Remove(0, 2);
+                }
+            }
+        }
+    }
+
+    
 
 	static public char[] Formula {
 		get {
