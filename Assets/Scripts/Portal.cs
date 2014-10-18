@@ -5,8 +5,8 @@ public class Portal : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        GetComponentInChildren<TextMesh>().renderer.enabled = false;
-	}
+        ((GameObject)GameObject.FindGameObjectWithTag("WinText")).GetComponent<TextMesh>().renderer.enabled = false;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -16,6 +16,6 @@ public class Portal : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D c)
     {
 
-            GetComponentInChildren<TextMesh>().renderer.enabled = true;
+            ((GameObject)GameObject.FindGameObjectWithTag("WinText")).GetComponent<TextMesh>().renderer.enabled = true;
     }
 }
