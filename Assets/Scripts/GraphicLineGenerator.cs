@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts;
 
+[ExecuteInEditMode]
 public class GraphicLineGenerator : MonoBehaviour {
     public string formula;
     LineRenderer lineRenderer;
@@ -13,8 +14,6 @@ public class GraphicLineGenerator : MonoBehaviour {
     List<Vector2> points;
 	// Use this for initialization
 	void Start () {
-        this.gameObject.AddComponent<PolygonCollider2D>();
-        
 	}
 	
 	// Update is called once per frame

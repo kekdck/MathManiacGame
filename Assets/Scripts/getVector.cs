@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class getVector : MonoBehaviour {
 
+    public float delta = 1.0f;
 	// Use this for initialization
 
 	void Start () {
@@ -32,7 +33,12 @@ public class getVector : MonoBehaviour {
 	public List<Vector2> getVect(string s){
 		List<Vector2> list = new List<Vector2> ();
 		string ss;
-		for (double i=-20; i<20; i++) {
+        for (double i = -20; i < 20; i += delta)
+        {
+            if(i == 0)
+            {
+                i = 0.01;
+            }
 			ss = s.Replace("-x", "x*-1");
             string numstr;
             if(i < 0)
