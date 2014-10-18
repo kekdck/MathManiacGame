@@ -4,17 +4,19 @@ using System.Collections;
 public class LevelState : MonoBehaviour {
 
 	public string formula = "";
-	static string mixedFormula = "";
+	static char[] mixedFormula;
 
 	// Use this for initialization
 	void Start () {
 		mixedFormula = shuffleString(formula);
-		while (formula == mixedFormula) {
+		while (formula.ToCharArray() == mixedFormula) {
 			mixedFormula = shuffleString(formula);
 		}
 	}
 
-	string shuffleString(string str)
+
+
+	char[]	 shuffleString(string str)
 	{
 		char[] mixedArray = str.ToCharArray();
 		int n = mixedArray.Length;  
@@ -26,14 +28,14 @@ public class LevelState : MonoBehaviour {
 			mixedArray[k] = mixedArray[n];  
 			mixedArray[n] = value;  
 		}  
-		return new string (mixedArray);
+		return mixedArray;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	}
 
-	static public string Formula {
+	static public char[] Formula {
 		get {
 			return mixedFormula;
 		}
