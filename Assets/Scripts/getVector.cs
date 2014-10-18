@@ -32,10 +32,18 @@ public class getVector : MonoBehaviour {
 	public List<Vector2> getVect(string s){
 		List<Vector2> list = new List<Vector2> ();
 		string ss;
-		for (double i=0; i<100; i++) {
+		for (double i=-20; i<20; i++) {
 			ss = s.Replace("-x", "x*-1");
-
-			ss = ss.Replace("x", i.ToString());
+            string numstr;
+            if(i < 0)
+            {
+                numstr = (-i).ToString() + "*-1";
+            }
+            else
+            {
+                numstr = i.ToString();
+            }
+			ss = ss.Replace("x", numstr);
 			list.Add(new Vector2((float)i,(float)getValue(ss)));
 
 		}
