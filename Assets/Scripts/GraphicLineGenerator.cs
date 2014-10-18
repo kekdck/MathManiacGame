@@ -4,26 +4,29 @@ using System.Collections.Generic;
 using Assets.Scripts;
 
 public class GraphicLineGenerator : MonoBehaviour {
+    public string formula;
     LineRenderer lineRenderer;
     [Range(0.0f , 1.0f)] 
     public float bold = 0.2f;
-
-    Vector2[] points = new Vector2[3];
+    getVector vector = new getVector();
+    string prevf;
+    List<Vector2> points;
 	// Use this for initialization
 	void Start () {
-        points[0] = new Vector2(0, 4);
-        points[1] = new Vector2(10, 0);
-        points[2] = new Vector2(11, -1);
-        lineRenderer = GetComponent<LineRenderer>();
-
         this.gameObject.AddComponent<PolygonCollider2D>();
-
-        GenerateMesh(new List<Vector2>(points));
+        
 	}
 	
 	// Update is called once per frame
 	void Update() {
+        if (prevf != formula)
+        {
+            points = vector.getVect(formula);
 
+            lineRenderer = GetComponent<LineRenderer>();
+            GenerateMesh(new List<Vector2>(points));
+        }
+        prevf = formula;
 	}
 
 

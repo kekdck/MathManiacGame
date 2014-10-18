@@ -29,7 +29,7 @@ public class getVector : MonoBehaviour {
 		return dec;
 	}
 
-	List<Vector2> getVect(string s){
+	public List<Vector2> getVect(string s){
 		List<Vector2> list = new List<Vector2> ();
 		string ss;
 		for (double i=0; i<100; i++) {

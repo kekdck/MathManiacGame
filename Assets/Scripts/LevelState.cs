@@ -14,8 +14,6 @@ public class LevelState : MonoBehaviour {
 		}
 	}
 
-
-
 	char[]	 shuffleString(string str)
 	{
 		char[] mixedArray = str.ToCharArray();
