@@ -17,14 +17,18 @@ public class GraphicLineGenerator : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update() {
-        if (prevf != formula)
+        try
         {
-            points = vector.getVect(formula);
+            if (prevf != formula)
+            {
+                points = vector.getVect(formula);
 
-            lineRenderer = GetComponent<LineRenderer>();
-            GenerateMesh(new List<Vector2>(points));
+                lineRenderer = GetComponent<LineRenderer>();
+                GenerateMesh(new List<Vector2>(points));
+            }
+            prevf = formula;
         }
-        prevf = formula;
+        catch { }
 	}
 
 
