@@ -12,7 +12,8 @@ namespace MathFunctions
     }
     public class MathParser
     {
-        private Dictionary<Parameters, decimal> _Parameters = new Dictionary<Parameters, decimal>();
+        private Dictionary<Parameters, decimal> _Parameters 
+            = new Dictionary<Parameters, decimal>();
         private List<String> OperationOrder = new List<string>();
 
         public Dictionary<Parameters, decimal> Parameters

@@ -4,7 +4,7 @@ using System.Collections;
 public class Portal : MonoBehaviour {
 
     static private int currentLvl = 0;
-    private float angleSpeed = 5.0f;
+    private float angleSpeed = 2.0f;
     private float pause = 2.0f;
     private bool teleport;
     
@@ -21,7 +21,7 @@ public class Portal : MonoBehaviour {
             pause -= Time.deltaTime;
         if (pause < 0)
         {
-            Application.LoadLevel(++currentLvl);
+            Application.LoadLevel(++currentLvl % Application.levelCount);
 
         }
 	}
