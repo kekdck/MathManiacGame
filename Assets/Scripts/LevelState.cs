@@ -44,8 +44,6 @@ public class LevelState : MonoBehaviour {
             tm.text = "";
             tm.text += a[i];
             list.Add(button1);
-            Debug.Log(a[i]);
-            Debug.Log(button1.transform.position);
         }
         button.tag = "text";
         
@@ -58,15 +56,13 @@ public class LevelState : MonoBehaviour {
         {
             TextMesh eval = GameObject.FindGameObjectWithTag("Evaluation").GetComponent<TextMesh>();
             GraphicLineGenerator graphic = GameObject.FindGameObjectWithTag("GraphicLine").GetComponentInChildren<GraphicLineGenerator>();
-            Debug.Log("кнопканажата.");
             Vector3 vector = Input.mousePosition;
             vector = Camera.main.ScreenToWorldPoint(vector);
             vector.z = 0;
-            Debug.Log(vector);
             for (int i = 0; i < list.Count; i++)
             {
                 Vector3 buttonPos = list[i].transform.position;
-                Debug.Log(buttonPos);
+
                 if ((Mathf.Abs(vector.x - buttonPos.x) <= list[i].collider2D.bounds.size.x/2) &&
                     (Mathf.Abs(vector.y - buttonPos.y) <= list[i].collider2D.bounds.size.y/2))
                 {

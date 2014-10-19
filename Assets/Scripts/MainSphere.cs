@@ -15,6 +15,9 @@ public class MainSphere : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+        
+            
+
 		if (!isCanMove) 
 		{
 			transform.position = initalPos;
@@ -32,15 +35,24 @@ public class MainSphere : MonoBehaviour {
             isCanMove = false;
 
         }
-        if(transform.position.y < 0)
-        {
-            isCanMove = false;
 
-        }
 		if (Input.GetKeyDown (KeyCode.R)) 
 		{
             initalPos = beginPos;
 			isCanMove = false;
 		}
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector3 vector = Input.mousePosition;
+            vector = Camera.main.ScreenToWorldPoint(vector);
+            vector.z = 0;
+            if ((Mathf.Abs(vector.x - transform.position.x) <= collider2D.bounds.size.x) &&
+                (Mathf.Abs(vector.y - transform.position.y) <= collider2D.bounds.size.y))
+            {
+                isCanMove = true;
+                rigidbody2D.AddForce(new Vector3(100.0f, 0.0f, 0.0f));
+            }
+        }
 	}
 }
