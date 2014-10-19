@@ -38,7 +38,7 @@ public class LevelState : MonoBehaviour {
         list.Capacity = a.Length;
         for (int i = 0; i < list.Capacity; i++)
         {
-            GameObject button1 = (GameObject)Instantiate(button, new Vector3(11, 7 - i), Quaternion.identity);
+            GameObject button1 = (GameObject)Instantiate(button, new Vector3(13, 7 - i), Quaternion.identity);
             TextMesh tm = button1.GetComponentInChildren<TextMesh>();
             tm.text = "";
             tm.text += a[i];
