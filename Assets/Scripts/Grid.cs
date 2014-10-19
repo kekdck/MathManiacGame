@@ -11,10 +11,10 @@ public class Grid : MonoBehaviour {
 	// Use this for initialization
     void Start()
     {
-        for(int i = -10; i < 10; i++)
+        for(int i = -10; i < 20; i++)
         {
             Instantiate(xLine, xLine.transform.position + new Vector3(i, 0), xLine.transform.rotation);
-
+            
             Instantiate(yLine, yLine.transform.position + new Vector3(0, i), yLine.transform.rotation);
         }
     }
