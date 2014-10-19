@@ -2,33 +2,32 @@
 using System.Collections;
 using System.Collections.Generic;
 
-[ExecuteInEditMode]
 public class GraphicLineGenerator : MonoBehaviour {
     public string formula;
     LineRenderer lineRenderer;
     [Range(0.0f , 1.0f)] 
     public float bold = 0.2f;
-    getVector vector = new getVector();
+    getVector vector;
     string prevf;
     List<Vector2> points;
 	// Use this for initialization
 	void Start () {
+		vector = this.GetComponent<getVector> ();
+		points = vector.getVect(formula);
+        lineRenderer = GetComponent<LineRenderer>();
+        GenerateMesh(new List<Vector2>(points));
 	}
 	
 	// Update is called once per frame
 	void Update() {
-        try
-        {
+        
             if (prevf != formula)
             {
-                points = vector.getVect(formula);
-
-                lineRenderer = GetComponent<LineRenderer>();
-                GenerateMesh(new List<Vector2>(points));
+                
             }
             prevf = formula;
-        }
-        catch { }
+        
+        
 	}
 
 

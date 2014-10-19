@@ -18,6 +18,8 @@ public class LevelState : MonoBehaviour {
         createButtons(mixedFormula);
 	}
 
+
+
 	char[]	 shuffleString(string str)
 	{
 		char[] mixedArray = str.ToCharArray();
