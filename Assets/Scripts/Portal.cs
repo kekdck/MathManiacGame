@@ -3,7 +3,10 @@ using System.Collections;
 
 public class Portal : MonoBehaviour {
 
+    static private int currentLvl = 0;
     private float angleSpeed = 5.0f;
+    private float pause = 2.0f;
+    private bool teleport;
     
 	// Use this for initialization
 	void Start () {
@@ -13,11 +16,20 @@ public class Portal : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	    transform.Rotate(new Vector3(0, 0, angleSpeed));
+        
+        if(teleport)
+            pause -= Time.deltaTime;
+        if (pause < 0)
+        {
+            Application.LoadLevel(++currentLvl);
+
+        }
 	}
 
     void OnTriggerEnter2D(Collider2D c)
     {
-
-            ((GameObject)GameObject.FindGameObjectWithTag("WinText")).GetComponent<TextMesh>().renderer.enabled = true;
+        teleport = true;
+        ((GameObject)GameObject.FindGameObjectWithTag("WinText")).GetComponent<TextMesh>().renderer.enabled = true;
+          
     }
 }

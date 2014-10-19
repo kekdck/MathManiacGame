@@ -22,6 +22,11 @@ public class MainSphere : MonoBehaviour {
 			isCanMove = true;
 			rigidbody2D.AddForce(new Vector3(100.0f, 0.0f, 0.0f));
 		}
+        if(transform.position.y < 0)
+        {
+            isCanMove = false;
+
+        }
 		if (Input.GetKeyDown (KeyCode.R)) 
 		{
 			isCanMove = false;
