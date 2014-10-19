@@ -14,7 +14,7 @@ public class GraphicLineGenerator : MonoBehaviour {
 	void Start () {
 		vector = this.GetComponent<getVector> ();
 		points = vector.getVect(formula);
-        lineRenderer = GetComponent<LineRenderer>();
+		lineRenderer = this.GetComponent<LineRenderer>();
         GenerateMesh(new List<Vector2>(points));
 	}
 	
