@@ -15,9 +15,6 @@ public class MainSphere : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
-            
-
 		if (!isCanMove) 
 		{
 			transform.position = initalPos;

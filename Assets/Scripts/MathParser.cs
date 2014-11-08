@@ -12,9 +12,15 @@ namespace MathFunctions
     }
     public class MathParser
     {
-        private Dictionary<Parameters, decimal> _Parameters 
+        private Dictionary<Parameters, decimal> _Parameters
             = new Dictionary<Parameters, decimal>();
-        private List<String> OperationOrder = new List<string>();
+        private Dictionary<String, int> OperationOrder = new Dictionary<String, int>()
+            {
+                {"/", 0},
+                {"*", 1},
+                {"-", 2},
+                {"+", 3},
+            };
 
         public Dictionary<Parameters, decimal> Parameters
         {
@@ -24,19 +30,16 @@ namespace MathFunctions
 
         public MathParser()
         {
-            OperationOrder.Add("/");
-            OperationOrder.Add("*");
-            OperationOrder.Add("-");
-            OperationOrder.Add("+");
+
         }
         public decimal Calculate(string Formula)
         {
             try
             {
-                string[] arr = Formula.Split("/+-*()".ToCharArray(),    StringSplitOptions.RemoveEmptyEntries);
+                string[] arr = Formula.Split("/+-*()".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                 foreach (KeyValuePair<Parameters, decimal> de in _Parameters)
                 {
-                    foreach(string s in arr)
+                    foreach (string s in arr)
                     {
                         if (s != de.Key.ToString() && s.EndsWith(de.Key.ToString()))
                         {
@@ -53,7 +56,7 @@ namespace MathFunctions
                     bool AppendAsterix = false;
                     if (lastOpenPhrantesisIndex > 0)
                     {
-                        if (Formula.Substring(lastOpenPhrantesisIndex - 1, 1) != "(" && !OperationOrder.Contains(Formula.Substring(lastOpenPhrantesisIndex - 1, 1)))
+                        if (Formula.Substring(lastOpenPhrantesisIndex - 1, 1) != "(" && !OperationOrder.ContainsKey(Formula.Substring(lastOpenPhrantesisIndex - 1, 1)))
                         {
                             AppendAsterix = true;
                         }
@@ -77,7 +80,7 @@ namespace MathFunctions
             for (int i = 0; i < operation.Length; i++)
             {
                 string currentCharacter = operation.Substring(i, 1);
-                if (OperationOrder.IndexOf(currentCharacter) > -1)
+                if (OperationOrder.ContainsKey(currentCharacter))
                 {
                     if (s != "")
                     {
@@ -93,7 +96,7 @@ namespace MathFunctions
             }
             arr.Add(s);
             s = "";
-            foreach (string op in OperationOrder)
+            foreach (string op in OperationOrder.Keys)
             {
                 while (arr.IndexOf(op) > -1)
                 {
